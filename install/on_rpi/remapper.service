@@ -4,10 +4,10 @@ After=multi-user.target
  
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 /home/pi/bthidhub/remapper.py
+ExecStart=/usr/bin/python3 /usr/local/bthidhub/remapper.py
 ExecStartPost=/usr/bin/bash -c 'echo none > /sys/class/leds/led0/trigger'
 ExecStopPost=/usr/bin/bash -c 'echo heartbeat > /sys/class/leds/led0/trigger'
-WorkingDirectory=/home/pi/bthidhub
+WorkingDirectory=/usr/local/bthidhub
 Restart=on-abort
  
 [Install]
