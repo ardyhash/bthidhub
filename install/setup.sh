@@ -8,5 +8,6 @@ sudo apt-get upgrade -y
 sudo apt-get install git -y
 
 git clone https://github.com/ardyhash/bthidhub
+sudo chown $(whoami):$(whoami) bthidhub -R
 cd bthidhub/install/on_rpi
 sh ./on_pi_setup.sh
