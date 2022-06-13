@@ -1,4 +1,6 @@
-cd ~/bthidhub/install/on_rpi
+workingdir=/usr/local/src
+
+cd ${workingdir}/bthidhub/install/on_rpi
 
 sudo echo 0 | sudo tee /sys/class/leds/led0/brightness > /dev/null
 
@@ -37,9 +39,10 @@ sudo pip3 install hid-tools
 sudo pip3 install pyudev
 sudo pip3 install bitarray
 
-cd ~
-git clone https://github.com/ruundii/bluez
-cd ~/bluez
+cd ${workingdir}
+sudo git clone https://github.com/ruundii/bluez
+sudo chown $(whoami):$(whoami) bluez -R
+cd ${workingdir}/bluez
 autoreconf -fvi
 
 ./configure --prefix=/usr --mandir=/usr/share/man --sysconfdir=/etc --localstatedir=/var --disable-a2dp --disable-avrcp --disable-network
@@ -49,12 +52,12 @@ make -j4
 sudo systemctl disable bluetooth
 sudo systemctl stop bluetooth
 sudo make install
-sudo python3 ~/bthidhub/install/on_rpi/config_replacer.py
-sudo cp ~/bthidhub/install/on_rpi/sdp_record.xml /etc/bluetooth/sdp_record.xml
-sudo cp ~/bthidhub/install/on_rpi/input.conf /etc/bluetooth/input.conf
-sudo cp ~/bthidhub/install/on_rpi/main.conf /etc/bluetooth/main.conf
+sudo python3 ${workingdir}/bthidhub/install/on_rpi/config_replacer.py
+sudo cp ${workingdir}/bthidhub/install/on_rpi/sdp_record.xml /etc/bluetooth/sdp_record.xml
+sudo cp ${workingdir}/bthidhub/install/on_rpi/input.conf /etc/bluetooth/input.conf
+sudo cp ${workingdir}/bthidhub/install/on_rpi/main.conf /etc/bluetooth/main.conf
 
-sudo cp ~/bthidhub/install/on_rpi/remapper.service /lib/systemd/system/remapper.service
+sudo cp ${workingdir}/bthidhub/install/on_rpi/remapper.service /lib/systemd/system/remapper.service
 sudo chmod 644 /lib/systemd/system/remapper.service
 sudo systemctl daemon-reload
 
