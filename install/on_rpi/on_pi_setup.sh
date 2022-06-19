@@ -59,6 +59,7 @@ sudo cp ${workingdir}/bthidhub/install/on_rpi/main.conf /etc/bluetooth/main.conf
 
 sudo cp ${workingdir}/bthidhub/install/on_rpi/remapper.service /lib/systemd/system/remapper.service
 sudo chmod 644 /lib/systemd/system/remapper.service
+sudo mkdir /var/log/web
 sudo systemctl daemon-reload
 
 sudo systemctl enable bluetooth
